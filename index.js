@@ -1,3 +1,4 @@
+var dateTime = new Date()
 
 let isEditing = false
 let arrayOfBook = [];
@@ -8,13 +9,16 @@ const saveBook = ()=>{
     if((bName.value == "") || (bAuthor.value == "") || (bDate.value == "") || (bPrice.value == "")){
       alert("fill the input to continue")
     }else{
-      
+      let hrs = dateTime.getHours();
+      let mins = dateTime.getMinutes();
+      let currentTime = `${hrs +' : ' + mins}`
+
       let bookName = bName.value
       let bookAuthor = bAuthor.value;
       let bookDate = bDate.value;
       let bookPrice = bPrice.value
   
-      let listOfBookobj = {title: bookName, author: bookAuthor, date: bookDate, price: bookPrice};
+      let listOfBookobj = {title: bookName, author: bookAuthor, date: bookDate, price: bookPrice, booktime: currentTime};
       arrayOfBook[saveEditIndex] = listOfBookobj;
       displayBook()
       localStorage.setItem("myBook", JSON.stringify(arrayOfBook))
@@ -29,38 +33,41 @@ const saveBook = ()=>{
   }else if((bName.value == "") || (bAuthor.value == "") || (bDate.value == "") || (bPrice.value == "")){
     alert("fill the input to continue")
   }else{
-      var dateTime = new Date()
-      var hrs = dateTime.getHours()
-      let time = hrs
-      let bookName = bName.value
-      let bookAuthor = bAuthor.value;
-      let bookDate = bDate.value;
-      let bookPrice = bPrice.value
-      
-      let listOfBookobj = {title: bookName, author: bookAuthor, date: bookDate, price: bookPrice, booktime: time};
-      arrayOfBook.push(listOfBookobj)
-      localStorage.setItem("myBook", JSON.stringify(arrayOfBook))
-      // console.log(listOfBookobj);
-      // console.log(arrayOfBook);
-      displayBook()
-      bName.value = "";
-      bAuthor.value = "";
-      bDate.value = "";
-      bPrice.value = "";
 
-    }
+    let hrs = dateTime.getHours();
+    let mins = dateTime.getMinutes();
+    let currentTime = `${hrs +' : ' + mins}`
+    
+    // let bookTime = currentTime
+    let bookName = bName.value
+    let bookAuthor = bAuthor.value;
+    let bookDate = bDate.value;
+    let bookPrice = bPrice.value
+    
+    let listOfBookobj = {title: bookName, author: bookAuthor, date: bookDate, price: bookPrice, booktime: currentTime};
+    arrayOfBook.push(listOfBookobj)
+    localStorage.setItem("myBook", JSON.stringify(arrayOfBook))
+    // console.log(listOfBookobj);
+    // console.log(arrayOfBook);
+    displayBook()
+    bName.value = "";
+    bAuthor.value = "";
+    bDate.value = "";
+    bPrice.value = "";
+    
+  }
   }
   // examPle()
-
+  
 
 
 
 const displayBook = () =>{
   bookBox.innerHTML = "";
   // for(i = 0; i < arrayOfBook.length; i++){
-  //   //  console.log(arrayOfBook[i]);
-  //   bookBox.innerHTML +=`
-  //   <tr>
+    //   //  console.log(arrayOfBook[i]);
+    //   bookBox.innerHTML +=`
+    //   <tr>
   //     <td>${i+1}</td>
   //     <td>${arrayOfBook[i].title}</td>
   //     <td>${arrayOfBook[i].author}</td>
@@ -70,17 +77,19 @@ const displayBook = () =>{
   // }
   arrayOfBook.map((eachItem, index)=>{
       bookBox.innerHTML += `
+      <div class="">
       <tr>
           <td>${index+1}</td>
           <td>${eachItem.title}</td>
           <td>${eachItem.author}</td>
           <td>${eachItem.date}</td>
-          <td>${eachItem.price}</td>
+          <td>${ "$ " + eachItem.price}</td>
           <td>${eachItem.booktime}</td>
-          <td class=""><button class="btn btn-danger text-light me-2" onclick="forDelete(${index})">Delete</button><button class="btn btn-warning text-light" onclick="forEdit(${index})">Edit</button></td>
-      </tr>
-      `
-  })
+          <td class="d-flex justify-content-center align-items-center p-3 gap-1"><button class="btn btn-danger text-light me-" onclick="forDelete(${index})">Delete</button><button class="btn btn-warning text-light" onclick="forEdit(${index})">Edit</button></td>
+          </tr>
+          </div>
+          `
+        })
 } 
 const getBookArrayLocal = () =>{
   let getLoca = localStorage.getItem("myBook")
@@ -104,17 +113,18 @@ const forEdit = (index) =>{
   // alert("work")
   // alert("i dey wprl")
   // if(confirm("are you editing")){
-  //   arrayOfBook.splice(index, 1)
+    //   arrayOfBook.splice(index, 1)
   //   localStorage.setItem("myBook", JSON.stringify(arrayOfBook))
   //   displayBook()
   // }
   let editArray = arrayOfBook[index]
-   bName.value = editArray.title
-   bAuthor.value = editArray.author;
-   bDate.value = editArray.date;
-   bPrice.value =  editArray.price;
-   saveEditIndex = (index)
-   forUpdatBtn.innerHTML = "Update"
+  bName.value = editArray.title
+  bAuthor.value = editArray.author;
+  bDate.value = editArray.date;
+  bPrice.value =  editArray.price;
+  saveEditIndex = (index)
+  forUpdatBtn.innerHTML = "Update"
+  // document.getElementById("forUpdatBtn") = `${<button class="btn btn-danger">Hello</button>}`
 }
 const updateBook = () =>{
 }

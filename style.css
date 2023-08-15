@@ -1,0 +1,26 @@
+@media  (max-width:576px){
+  .row{
+    width: 100% !important;
+    /* display: flex; */
+    background-color: red;
+    /* flex-wrap: wrap;
+    flex-direction: column; */
+  }
+}
+@media  (max-width:576px){
+  /* .bookTable{ */
+    /* width: 20%; */
+    /* display: flex; */
+    /* background-color: red; */
+    /* flex-wrap: wrap; */
+    /* flex-direction: column; */
+  }
+}
+@media  (max-width:576px){
+  .bookInp{
+    /* width: 100%; */
+    /* display: flex;
+    flex-wrap: wrap;
+    flex-direction: column; */
+  }
+}
