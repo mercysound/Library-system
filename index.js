@@ -3,15 +3,16 @@ var dateTime = new Date()
 let isEditing = false
 let arrayOfBook = [];
 let saveEditIndex;
+let currentTime = new Date()
 const saveBook = ()=>{
   // alert("work")
   if(isEditing){
     if((bName.value == "") || (bAuthor.value == "") || (bDate.value == "") || (bPrice.value == "")){
       alert("fill the input to continue")
     }else{
-      let hrs = dateTime.getHours();
-      let mins = dateTime.getMinutes();
-      let currentTime = `${hrs +' : ' + mins}`
+      // let hrs = dateTime.getHours();
+      // let mins = dateTime.getMinutes();
+      // let currentTime = `${hrs +' : ' + mins}`
 
       let bookName = bName.value
       let bookAuthor = bAuthor.value;
@@ -31,12 +32,12 @@ const saveBook = ()=>{
     isEditing = false
     forUpdatBtn.innerHTML = "Save book"
   }else if((bName.value == "") || (bAuthor.value == "") || (bDate.value == "") || (bPrice.value == "")){
-    alert("fill the input to continue")
+    alert("Complete filling the input to continue")
   }else{
 
     let hrs = dateTime.getHours();
     let mins = dateTime.getMinutes();
-    let currentTime = `${hrs +' : ' + mins}`
+    // let currentTime = `${hrs +' : ' + mins}`
     
     // let bookTime = currentTime
     let bookName = bName.value
@@ -44,7 +45,7 @@ const saveBook = ()=>{
     let bookDate = bDate.value;
     let bookPrice = bPrice.value
     
-    let listOfBookobj = {title: bookName, author: bookAuthor, date: bookDate, price: bookPrice, booktime: currentTime};
+    let listOfBookobj = {title: bookName, author: bookAuthor, date: bookDate, price: bookPrice, booktime: currentTime.toLocaleTimeString()};
     arrayOfBook.push(listOfBookobj)
     localStorage.setItem("myBook", JSON.stringify(arrayOfBook))
     // console.log(listOfBookobj);
